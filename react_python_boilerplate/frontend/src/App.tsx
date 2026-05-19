@@ -93,7 +93,7 @@ export default function App() {
             border: "1px solid #334155",
           }}
         >
-          <strong>Backend Status:</strong>
+          <strong>Backend Status :</strong>
 
           <div
             style={{
