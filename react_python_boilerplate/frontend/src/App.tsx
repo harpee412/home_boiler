@@ -1,122 +1,110 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useEffect, useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+type HelloResponse = {
+  message: string;
+};
+
+export default function App() {
+  const [message, setMessage] = useState("Connecting to backend...");
+
+  useEffect(() => {
+    const load = async (): Promise<void> => {
+      try {
+        const response = await fetch("./api/hello");
+
+        const data = (await response.json()) as HelloResponse;
+
+        setMessage(data.message);
+      } catch (error) {
+        console.error(error);
+
+        setMessage("Failed to connect to backend");
+      }
+    };
+
+    void load();
+  }, []);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#0f172a",
+        color: "#ffffff",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        fontFamily: "Arial, sans-serif",
+        padding: "2rem",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "800px",
+          width: "100%",
+          background: "#111827",
+          border: "1px solid #1f2937",
+          borderRadius: "16px",
+          padding: "3rem",
+          boxShadow: "0 0 40px rgba(0,0,0,0.4)",
+        }}
+      >
+        <h1
+          style={{
+            marginTop: 0,
+            fontSize: "3rem",
+            marginBottom: "1rem",
+          }}
         >
-          Count is {count}
-        </button>
-      </section>
+          React + Python Home Assistant Boilerplate
+        </h1>
 
-      <div className="ticks"></div>
+        <p
+          style={{
+            fontSize: "1.2rem",
+            lineHeight: 1.7,
+            color: "#cbd5e1",
+          }}
+        >
+          This is a working Home Assistant add-on boilerplate using:
+        </p>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+        <ul
+          style={{
+            lineHeight: 2,
+            fontSize: "1.1rem",
+            color: "#93c5fd",
+          }}
+        >
+          <li>React</li>
+          <li>TypeScript</li>
+          <li>Vite</li>
+          <li>FastAPI</li>
+          <li>Docker</li>
+          <li>Home Assistant Ingress</li>
+        </ul>
+
+        <div
+          style={{
+            marginTop: "2rem",
+            padding: "1rem",
+            background: "#1e293b",
+            borderRadius: "10px",
+            border: "1px solid #334155",
+          }}
+        >
+          <strong>Backend Status:</strong>
+
+          <div
+            style={{
+              marginTop: "0.5rem",
+              color: "#4ade80",
+            }}
+          >
+            {message}
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      </div>
+    </div>
+  );
 }
-
-export default App
