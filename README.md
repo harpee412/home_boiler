@@ -217,10 +217,8 @@ frontend/vite.config.ts
 - Home Assistant Supervisor API
 - Camera streaming
 - Object detection
-- SQLite/Postgres
+- Postgres
 - Grafana dashboards
-- Temporal workflows
-- Kafka event streaming
 
 ---
 
