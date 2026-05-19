@@ -1,3 +1,9 @@
-name: Home Boiler Add-ons
-url: https://github.com/harpee412/home_boiler
+name: Home Assistant Boiler Add-ons
+url: https://github.com/harpee412/ha_boiler
 maintainer: harpee412
+
+description: >
+  Modern Home Assistant add-ons built with React, TypeScript,
+  FastAPI, Docker, and advanced smart home tooling.
+
+homepage: https://github.com/harpee412/ha_boiler

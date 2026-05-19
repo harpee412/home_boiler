@@ -1,52 +1,35 @@
 # React Python Home Assistant Add-on Boilerplate
 
-A working Home Assistant add-on boilerplate using:
+A working Home Assistant add-on boilerplate using React, Vite, TypeScript, FastAPI, and Docker with Home Assistant Ingress support.
 
-- React
-- Vite
-- TypeScript
-- FastAPI
-- Docker
-- Home Assistant Ingress
-
-This project provides a clean starting point for building modern Home Assistant add-ons with a React frontend and Python backend.
-
----
-
-# Features
+## Features
 
 - Home Assistant add-on compatible
 - FastAPI backend
-- React frontend
-- TypeScript support
+- React frontend with TypeScript
 - Vite build system
-- Dockerized
+- Docker containerized
 - Ingress-compatible UI
 - API-ready structure
 - Expandable architecture
 
----
+## Project Structure
 
-# Project Structure
-
-```txt
+```
 react_python_boilerplate/
 ├── backend/
 │   ├── api/
 │   │   └── routes.py
 │   └── main.py
-│
 ├── frontend/
 │   ├── src/
 │   │   ├── App.tsx
 │   │   ├── main.tsx
 │   │   └── index.css
-│   │
 │   ├── index.html
 │   ├── package.json
 │   ├── tsconfig.json
 │   └── vite.config.ts
-│
 ├── build.yaml
 ├── config.yaml
 ├── Dockerfile
@@ -54,52 +37,32 @@ react_python_boilerplate/
 └── run.sh
 ```
 
----
-
-# Requirements
+## Requirements
 
 - Home Assistant OS
 - Home Assistant Supervisor
 - GitHub repository
 - Docker support
 
----
+## Installation
 
-# Installation
+### Add Repository to Home Assistant
 
-## Add Repository to Home Assistant
+1. Navigate to **Settings → Add-ons → Add-on Store → Repositories**
+2. Add the repository URL:
+   ```
+   https://github.com/harpee412/home_boiler
+   ```
 
-Navigate to:
+### Install Add-on
 
-```txt
-Settings → Add-ons → Add-on Store → Repositories
-```
+1. Install **React Python Boilerplate**
+2. Start the add-on
+3. Open the Web UI
 
-Add:
+## Local Development
 
-```txt
-https://github.com/harpee412/home_boiler
-```
-
----
-
-# Install Add-on
-
-Install:
-
-```txt
-React Python Boilerplate
-```
-
-Start the add-on.
-
-Open the Web UI.
-
----
-
-# Local Development
-
-## Frontend
+### Frontend Setup
 
 ```bash
 cd react_python_boilerplate/frontend
@@ -109,15 +72,14 @@ npm install
 npm run dev
 ```
 
-Frontend development server:
-
-```txt
+The development server runs at:
+```
 http://localhost:5173
 ```
 
----
+### Backend Setup
 
-## Backend
+Create and activate a virtual environment:
 
 ```bash
 cd react_python_boilerplate
@@ -127,35 +89,29 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-Windows PowerShell:
-
+On Windows PowerShell:
 ```powershell
 .venv\Scripts\Activate.ps1
 ```
 
 Install dependencies:
-
 ```bash
 pip install -r requirements.txt
 ```
 
-Run backend:
-
+Run the backend:
 ```bash
 uvicorn backend.main:app --reload --host 0.0.0.0 --port 8099
 ```
 
-Backend API:
-
-```txt
+The API is available at:
+```
 http://localhost:8099/api/hello
 ```
 
----
+## API Examples
 
-# API Example
-
-Example endpoint:
+### Backend Endpoint
 
 ```python
 @app.get("/api/hello")
@@ -165,50 +121,32 @@ async def hello():
     }
 ```
 
----
+### Frontend API Call
 
-# Frontend Example
-
-Example API fetch:
-
-```ts
+```typescript
 const response = await fetch("./api/hello");
-
 const data = await response.json();
 ```
 
----
+## Build Process
 
-# Build Process
-
-The add-on Docker build will:
+The Docker build for the add-on performs the following steps:
 
 1. Install Python dependencies
 2. Install frontend dependencies
-3. Build React frontend
+3. Build React frontend with Vite
 4. Serve frontend through FastAPI
 
----
+## Home Assistant Ingress Configuration
 
-# Home Assistant Ingress
+Vite requires relative asset paths for Home Assistant Ingress compatibility.
 
-Vite requires relative asset paths for ingress compatibility.
-
-Configured in:
-
-```ts
+Configure in `frontend/vite.config.ts`:
+```typescript
 base: "./"
 ```
 
-inside:
-
-```txt
-frontend/vite.config.ts
-```
-
----
-
-# Future Expansion Ideas
+## Future Expansion Ideas
 
 - Zustand state management
 - TailwindCSS
@@ -217,54 +155,37 @@ frontend/vite.config.ts
 - Home Assistant Supervisor API
 - Camera streaming
 - Object detection
-- Postgres
+- PostgreSQL
 - Grafana dashboards
 
----
+## Troubleshooting
 
-# Troubleshooting
-
-## Blank White Screen
+### Blank White Screen
 
 Usually caused by incorrect Vite asset paths.
 
-Verify:
+**Verify:** `base: "./"` is configured in `vite.config.ts`
 
-```ts
-base: "./"
-```
+### Docker Build Fails
 
-in `vite.config.ts`.
-
----
-
-## Docker Build Fails
-
-Verify:
-
+Verify the following:
 - `Dockerfile` is not empty
 - `build.yaml` exists
 - `requirements.txt` is valid
 
----
+### Frontend Dependency Issues
 
-## Frontend Dependency Issues
-
-Delete:
-
-```txt
-node_modules/
-package-lock.json
+Delete the node modules and lock file:
+```bash
+rm -rf node_modules/
+rm package-lock.json
 ```
 
 Then reinstall:
-
 ```bash
 npm install
 ```
 
----
-
-# License
+## License
 
 MIT
