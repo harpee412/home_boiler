@@ -1,5 +1,5 @@
 name: React Python Boilerplate
-version: "1.0.1"
+version: "1.0.2"
 slug: react_python_boilerplate
 description: React and Python Home Assistant add-on
 startup: services
